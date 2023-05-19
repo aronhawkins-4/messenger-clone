@@ -1,46 +1,54 @@
 'use client';
-import React from 'react';
-import { IconType } from 'react-icons';
+
+import clsx from 'clsx';
 
 interface ButtonProps {
-	label: string;
-	onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	type?: 'button' | 'submit' | 'reset' | undefined;
+	fullWidth?: boolean;
+	children?: React.ReactNode;
+	onClick?: () => void;
+	secondary?: boolean;
+	danger?: boolean;
 	disabled?: boolean;
-	outline?: boolean;
-	small?: boolean;
-	icon?: IconType;
 }
-
 export const Button: React.FC<ButtonProps> = ({
-	label,
+	type,
+	fullWidth,
+	children,
 	onClick,
+	secondary,
+	danger,
 	disabled,
-	outline,
-	small,
-	icon: Icon,
 }) => {
 	return (
 		<button
 			onClick={onClick}
+			type={type}
 			disabled={disabled}
-			className={`
-            relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full 
-            ${outline ? 'bg-white' : 'bg-rose-500'} 
-            ${outline ? 'border-black' : 'border-rose-500'} 
-            ${outline ? 'text-black' : 'text-white'} 
-            ${small ? 'py-1' : 'py-3'}
-            ${small ? 'text-sm' : 'text-md'}
-            ${small ? 'font-light' : 'font-semibold'}
-            ${small ? 'border' : 'border-2'}
-            `}
-		>
-			{Icon && (
-				<Icon
-					size={24}
-					className='absolute left-4 top-3'
-				></Icon>
+			className={clsx(
+				`
+				flex
+				justify-center
+				rounded-md
+				px-3
+				py-2
+				text-sm
+				font-semibold
+				focus-visible:outline
+				focus-visible:outline-2
+				focus-visible:outline-offset-2
+				`,
+				disabled && 'opacity-50 cursor-default',
+				fullWidth && 'w-full',
+				secondary ? 'text-gray-900' : 'text-white',
+				danger &&
+					'bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-600',
+				!secondary &&
+					!danger &&
+					'bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600'
 			)}
-			{label}
+		>
+			{children}
 		</button>
 	);
 };
