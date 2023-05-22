@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import { Modal } from '../Modal';
 import { Input } from '../inputs/Input';
 import Image from 'next/image';
+import { CldUploadButton } from 'next-cloudinary';
 
 interface SettingsModalProps {
 	isOpen?: boolean;
@@ -80,6 +81,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, c
 										className='rounded-full'
 										src={image || currentUser?.image || '/images/placeholder.jpg'}
 									/>
+									<CldUploadButton></CldUploadButton>
 								</div>
 							</div>
 						</div>
