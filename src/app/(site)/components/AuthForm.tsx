@@ -24,7 +24,7 @@ export const AuthForm = () => {
 		if (session?.status === 'authenticated') {
 			router.push('/users/');
 		}
-	}, [session?.status]);
+	}, [session?.status, router]);
 
 	const toggleVariant = useCallback(() => {
 		if (variant === 'LOGIN') {
@@ -153,9 +153,7 @@ export const AuthForm = () => {
 					</div>
 				</div>
 				<div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500'>
-					<div>
-						{variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}
-					</div>
+					<div>{variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
 					<div
 						onClick={toggleVariant}
 						className='underline cursor-pointer'
